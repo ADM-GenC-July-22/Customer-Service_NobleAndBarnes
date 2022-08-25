@@ -39,27 +39,29 @@ public class CustomerAddressWebController {
 	}
 	
 	// CUSTOMERS TEST CONTROLLER
-	// Show All Customers
+	// Show All Customers GOOD
 	@GetMapping("/customers")
 	public List<Customer> retrieveAllCustomers() {
 		return custService.findallCustomers();
 	}
-	// Find by ID
+	// Find by ID GOOD
 	@GetMapping("/customers/{id}")
 	public Customer retrieveCustomer(@PathVariable int id) {
 		return custService.findCustomerByID(id);
 	}
-	// Delete Mapping by ID
+	// Delete Mapping by ID GOOD
 	@DeleteMapping("/customers/{id}")
 	public void deleteCustomer(@PathVariable int id) {
 		custService.deleteCustomerByID(id);
 	}
-	// Create a Customer Mapping
+	// Create a Customer Mapping  Good
 	@PostMapping("/customers")
 	public void createCustomer(@RequestBody Customer customer) {
 		custService.addCustomer(customer);
+		// Create a cart for that customer
+		// 
 	}
-	// Update a Customer Mapping
+	// Update a Customer Mapping Good
 	@PutMapping("/customers")
 	@Transactional
 	public void updateCustomers(@RequestBody Customer cust) {
@@ -72,11 +74,17 @@ public class CustomerAddressWebController {
 		customerTemp = custService.findCustomerByID(id);
 		return custService.showCustomerAddress(customerTemp.getAddressObj().getAddressID());
 	}
+	
 	// Update an Address mapping
-	@PutMapping("/address")
+	@PutMapping("/customers/{id}/addresstest")
 	@Transactional
-	public void updateAddresses(@RequestBody Address add) {
-		custService.updateAddress(add);
+	public void updateAddresses(@RequestBody Address add, @PathVariable int id) {
+		
+		 Customer customerTemp; customerTemp = custService.findCustomerByID(id);
+		 Address newAddress = custService.createAddress(add);
+		 customerTemp.setAddressObj(newAddress);
+		 custService.updateCustomer(customerTemp);
+		 
 	}
 	
 	

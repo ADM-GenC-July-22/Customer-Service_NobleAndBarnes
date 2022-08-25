@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.cognizant.domain.Address.Address;
 import com.cognizant.domain.Address.AddressRepository;
@@ -48,6 +49,10 @@ public class CustomerAddressService {
 	}
 	public void updateAddress(Address address) {
 		addressRepo.updateAddress(address.getUnitNumber(), address.getStreetName(), address.getCity(), address.getState(), address.getZipCode(), address.getAddressID());
+	}
+	public Address createAddress(Address add) {
+		addressRepo.save(add);
+		return add;
 	}
 	
 	
