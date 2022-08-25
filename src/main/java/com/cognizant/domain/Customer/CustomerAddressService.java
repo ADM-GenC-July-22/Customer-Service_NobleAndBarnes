@@ -42,6 +42,10 @@ public class CustomerAddressService {
 	public void updateCustomer(Customer cust) {
 		customerRepo.updateCustomer(cust.getPhoneNumber(), cust.getFirstName(), cust.getLastName(), cust.getEmail(), cust.getCustomerID());
 	}
+	public Customer findCustomerByPhoneNumber(long phoneNumber) {
+		return customerRepo.findByPhoneNumber(phoneNumber);
+	}
+	
 	
 	// Address Functions
 	public Address showCustomerAddress(int id) {

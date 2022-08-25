@@ -67,6 +67,13 @@ public class CustomerAddressWebController {
 	public void updateCustomers(@RequestBody Customer cust) {
 		custService.updateCustomer(cust);
 	}
+	
+	// Find Customer by Phone Number (8765139358)
+	@GetMapping("/customers/{phoneNumber}")
+	public Customer retrieveCustomerByPhoneNumber(@PathVariable long phoneNumber) {
+		return custService.findCustomerByPhoneNumber(phoneNumber);
+	}
+	
 	// Find the customer Address
 	@GetMapping("/customers/{id}/address")
 	public Address showAddress(@PathVariable int id) {
@@ -75,17 +82,21 @@ public class CustomerAddressWebController {
 		return custService.showCustomerAddress(customerTemp.getAddressObj().getAddressID());
 	}
 	
-	// Update an Address mapping
-	@PutMapping("/customers/{id}/addresstest")
-	@Transactional
-	public void updateAddresses(@RequestBody Address add, @PathVariable int id) {
-		
-		 Customer customerTemp; customerTemp = custService.findCustomerByID(id);
-		 Address newAddress = custService.createAddress(add);
-		 customerTemp.setAddressObj(newAddress);
-		 custService.updateCustomer(customerTemp);
-		 
-	}
+	/*
+	 * // Update an Address mapping
+	 * 
+	 * @PutMapping("/customers/{id}/addresstest")
+	 * 
+	 * @Transactional public void updateAddresses(@RequestBody Address
+	 * add, @PathVariable int id) {
+	 * 
+	 * Customer customerTemp; customerTemp = custService.findCustomerByID(id);
+	 * Address newAddress = custService.createAddress(add);
+	 * customerTemp.setAddressObj(newAddress);
+	 * custService.updateCustomer(customerTemp);
+	 * 
+	 * }
+	 */
 	
 	
 }

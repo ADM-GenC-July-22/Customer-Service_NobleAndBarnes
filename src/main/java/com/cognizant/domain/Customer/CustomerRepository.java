@@ -12,4 +12,8 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	@Modifying
 	@Query("update Customer set phoneNumber = ?1, customerFirstName = ?2, customerLastName = ?3, email = ?4 where customerID = ?5")
 	void updateCustomer(Long phoneNumber, String customerFirstName, String customerLastName, String email, Integer customerId);
+	
+	@Query("SELECT *FROM Customer WHERE phoneNumber= ?1 LIMIT 1")
+	Customer findByPhoneNumber(Long phoneNumber);
 }
+
