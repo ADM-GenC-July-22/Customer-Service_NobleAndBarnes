@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -19,14 +20,12 @@ import com.cognizant.domain.Address.Address;
 import com.cognizant.domain.Address.AddressRepository;
 
 
-
+@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 public class CustomerAddressWebController {
 	
 	// Kill Port Cmd
 	// npx kill-port 8080
-	
-	private AddressRepository addressRepo;
 	
 	private CustomerAddressService custService;
 	
@@ -78,7 +77,7 @@ public class CustomerAddressWebController {
 		return custService.showCustomerAddress(customerTemp.getAddressObj().getAddressID());
 	}
 	
-	// Find Customer by Phone Number (8765139358)
+	// Find Customer by Phone Number (6513585681)
 	@GetMapping("/customers/{phoneNumber}/phonenumber") 
 	public Customer retrieveCustomerByPhoneNumber(@PathVariable long phoneNumber) { 
 			List<Customer> customerlist = custService.findCustomerByPhoneNumber(phoneNumber);
