@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cognizant.domain.Address.Address;
+import com.cognizant.domain.Address.AddressRepository;
 
 
 
@@ -24,7 +26,8 @@ public class CustomerAddressWebController {
 	// Kill Port Cmd
 	// npx kill-port 8080
 	
-
+	private AddressRepository addressRepo;
+	
 	private CustomerAddressService custService;
 	
 	public CustomerAddressWebController(CustomerAddressService custService) {
@@ -58,22 +61,15 @@ public class CustomerAddressWebController {
 	@PostMapping("/customers")
 	public void createCustomer(@RequestBody Customer customer) {
 		custService.addCustomer(customer);
-		// Create a cart for that customer
-		// 
 	}
-	// Update a Customer Mapping Good
+	// Update a Customer Mapping and Address
 	@PutMapping("/customers")
 	@Transactional
 	public void updateCustomers(@RequestBody Customer cust) {
 		custService.updateCustomer(cust);
 	}
-	
-	// Find Customer by Phone Number (8765139358)
-	@GetMapping("/customers/{phoneNumber}")
-	public Customer retrieveCustomerByPhoneNumber(@PathVariable long phoneNumber) {
-		return custService.findCustomerByPhoneNumber(phoneNumber);
-	}
-	
+
+	// ADDRESS CONTROLLERS
 	// Find the customer Address
 	@GetMapping("/customers/{id}/address")
 	public Address showAddress(@PathVariable int id) {
@@ -82,21 +78,13 @@ public class CustomerAddressWebController {
 		return custService.showCustomerAddress(customerTemp.getAddressObj().getAddressID());
 	}
 	
-	/*
-	 * // Update an Address mapping
-	 * 
-	 * @PutMapping("/customers/{id}/addresstest")
-	 * 
-	 * @Transactional public void updateAddresses(@RequestBody Address
-	 * add, @PathVariable int id) {
-	 * 
-	 * Customer customerTemp; customerTemp = custService.findCustomerByID(id);
-	 * Address newAddress = custService.createAddress(add);
-	 * customerTemp.setAddressObj(newAddress);
-	 * custService.updateCustomer(customerTemp);
-	 * 
-	 * }
-	 */
+	// Find Customer by Phone Number (8765139358)
+	@GetMapping("/customers/{phoneNumber}/phonenumber") 
+	public Customer retrieveCustomerByPhoneNumber(@PathVariable long phoneNumber) { 
+			List<Customer> customerlist = custService.findCustomerByPhoneNumber(phoneNumber);
+			return customerlist.get(0);
+	 }
+	 
 	
 	
 }

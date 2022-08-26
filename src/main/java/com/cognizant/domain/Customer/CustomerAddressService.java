@@ -41,25 +41,28 @@ public class CustomerAddressService {
 	}
 	public void updateCustomer(Customer cust) {
 		customerRepo.updateCustomer(cust.getPhoneNumber(), cust.getFirstName(), cust.getLastName(), cust.getEmail(), cust.getCustomerID());
+		Address custAddress = cust.getAddressObj();
+		addressRepo.updateAddress(custAddress.getUnitNumber(), custAddress.getStreetName(), custAddress.getCity(), custAddress.getState(), custAddress.getZipCode(), custAddress.getAddressID());
+
 	}
-	public Customer findCustomerByPhoneNumber(long phoneNumber) {
-		return customerRepo.findByPhoneNumber(phoneNumber);
+
+	public List<Customer> findCustomerByPhoneNumber(long phoneNumber) { 
+		return customerRepo.findByPhoneNumber(phoneNumber); 
 	}
-	
+
 	
 	// Address Functions
 	public Address showCustomerAddress(int id) {
 		return addressRepo.findById(id).get();
 	}
-	public void updateAddress(Address address) {
-		addressRepo.updateAddress(address.getUnitNumber(), address.getStreetName(), address.getCity(), address.getState(), address.getZipCode(), address.getAddressID());
-	}
+
+	
 	public Address createAddress(Address add) {
 		addressRepo.save(add);
 		return add;
 	}
 	
-	
+	// Repository Getters and Setters
 	public AddressRepository getAddressRepo() {
 		return addressRepo;
 	}
