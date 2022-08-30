@@ -19,7 +19,7 @@ public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 	@Query(value="SELECT *FROM Customer WHERE phoneNumber= ?1", nativeQuery=true) 
 	List<Customer> findByPhoneNumber(Long phoneNumber);
 	
-s
+
 
 }
 
