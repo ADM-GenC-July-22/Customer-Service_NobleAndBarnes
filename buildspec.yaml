@@ -28,8 +28,6 @@ phases:
 
       - echo Build started on `date`
 
-      - mvn package
-
 
 
   post_build:
