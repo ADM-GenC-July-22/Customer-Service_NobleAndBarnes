@@ -58,9 +58,9 @@ public class CustomerAddressWebController {
 	}
 	// Create a Customer Mapping  Good
 	@PostMapping("/customers")
-	public void createCustomer(@RequestBody Customer customer) {
-		custService.addCustomer(customer);
-	}
+    public Customer createCustomer(@RequestBody Customer customer) {
+        return custService.addCustomer(customer);
+    }
 	// Update a Customer Mapping and Address
 	@PutMapping("/customers")
 	@Transactional
@@ -76,6 +76,7 @@ public class CustomerAddressWebController {
 		customerTemp = custService.findCustomerByID(id);
 		return custService.showCustomerAddress(customerTemp.getAddressObj().getAddressID());
 	}
+	
 	
 	// Find Customer by Phone Number (6513585681)
 	@GetMapping("/customers/{phoneNumber}/phonenumber") 

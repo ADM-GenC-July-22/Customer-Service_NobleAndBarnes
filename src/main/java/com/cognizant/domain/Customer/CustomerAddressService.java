@@ -37,13 +37,13 @@ public class CustomerAddressService {
 		// Deletes address as well
 	}
 	public Customer addCustomer(Customer customer) {
-		return customerRepo.save(customer);
-	}
+        addressRepo.save(customer.getAddressObj());
+        return customerRepo.save(customer);
+    }
 	public void updateCustomer(Customer cust) {
 		customerRepo.updateCustomer(cust.getPhoneNumber(), cust.getFirstName(), cust.getLastName(), cust.getEmail(), cust.getCustomerID());
 		Address custAddress = cust.getAddressObj();
 		addressRepo.updateAddress(custAddress.getUnitNumber(), custAddress.getStreetName(), custAddress.getCity(), custAddress.getState(), custAddress.getZipCode(), custAddress.getAddressID());
-
 	}
 
 	public List<Customer> findCustomerByPhoneNumber(long phoneNumber) { 
