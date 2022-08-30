@@ -20,8 +20,6 @@ phases:
 
       - echo In the pre_build phase...
 
-      - mvn test
-
 
 
   build:
