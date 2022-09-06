@@ -6,9 +6,9 @@ import org.springframework.context.ConfigurableApplicationContext;
 
 @SpringBootApplication
 public class CustomerServiceApplication {
-	private static ConfigurableApplicationContext context;
+	
 	public static void main(String[] args) {
-		context = SpringApplication.run(CustomerServiceApplication.class, args);
+		SpringApplication.run(CustomerServiceApplication.class, args);
 	}
 
 }

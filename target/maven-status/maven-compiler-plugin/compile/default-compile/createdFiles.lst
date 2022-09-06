@@ -1,7 +1,0 @@
-com\cognizant\domain\Customer\CustomerAddressWebController.class
-com\cognizant\domain\Customer\Customer.class
-com\cognizant\domain\Customer\CustomerAddressService.class
-com\cognizant\domain\Address\Address.class
-com\cognizant\domain\Customer\CustomerRepository.class
-com\cognizant\domain\Address\AddressRepository.class
-com\cognizant\domain\CustomerServiceApplication.class
