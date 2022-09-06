@@ -26,22 +26,16 @@ phases:
 
     commands:
 
-      - echo Build started on `date`
+      - echo Build started on `date`s
 
 
 
   post_build:
-
     commands:
-
-      - echo Build completed on `date`
-
-
-
+    - echo Build completed on `date`
+    - mvn package
+    - mv target/Customer-Service-0.0.1-SNAPSHOT.jar Customer-Service-0.0.1-SNAPSHOT.jar
 artifacts:
-
   files:
-
-    - target/*.jar
-
-  discard-paths: yes
+  - Customer-Service-0.0.1-SNAPSHOT.jar
+  - .ebextensions/**/*
